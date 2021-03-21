@@ -1,11 +1,3 @@
-PUT http://localhost:3001/api/notes/4
-Content-Type: application/json
-
-{
-    "content": "new not important note",
-    "importance": true
-}
-###
 POST http://localhost:3001/api/notes
 Content-Type: application/json
 
