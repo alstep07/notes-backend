@@ -9,7 +9,7 @@
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build --prod && cp -r build ../backend",
     "deploy": "git push heroku main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push heroku main && npm run deploy",
     "logs:prod": "heroku logs --tail"
   },
   "dependencies": {
