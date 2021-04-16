@@ -61,13 +61,39 @@ test('a new note without content can not be added', async () => {
     important: false
   }
 
-  await api
-    .post('/api/notes')
-    .send(newNote)
-    .expect(400)
+  await api.post('/api/notes').send(newNote).expect(400)
 
   const notesAtEnd = await helper.notesInDb()
   expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
+})
+
+test('a specific note can be viewed', async () => {
+  const notesAtStart = await helper.notesInDb()
+
+  const noteToView = notesAtStart[0]
+
+  const resultNote = await api
+    .get(`/api/notes/${noteToView.id}`)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const processedNote = JSON.parse(JSON.stringify(noteToView))
+
+  expect(resultNote.body).toEqual(processedNote)
+})
+
+test('a note can be deleted', async () => {
+  const notesAtStart = await helper.notesInDb()
+  const noteToBeDelete = notesAtStart[0]
+
+  await api.delete(`/api/notes/${noteToBeDelete.id}`).expect(204)
+
+  const notesAtEnd = await helper.notesInDb()
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length - 1)
+
+  const contents = notesAtEnd.map(note => note.content)
+
+  expect(contents).not.toContain(noteToBeDelete.content)
 })
 
 afterAll(() => {

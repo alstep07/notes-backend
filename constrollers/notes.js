@@ -15,7 +15,7 @@ notesRouter.get('/:id', async (request, response) => {
   response.json(note)
 })
 
-notesRouter.post('/', async (request, response) => {
+notesRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   if (!body.content) {
@@ -29,8 +29,12 @@ notesRouter.post('/', async (request, response) => {
       date: new Date()
     })
 
-    const savedNote = await note.save()
-    response.json(savedNote)
+    try {
+      const savedNote = await note.save()
+      response.json(savedNote)
+    } catch (exception) {
+      next(exception)
+    }
   }
 })
 
