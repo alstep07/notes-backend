@@ -2,5 +2,7 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "important": true
+    "content": "first alstep note",
+    "important": true,
+    "userId": "609c219db30646761472d9c0"
 }
