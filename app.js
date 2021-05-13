@@ -1,11 +1,13 @@
 const express = require('express')
 require('express-async-errors')
-const cors = require('cors')
 const notesRouter = require('./constrollers/notes')
 const usersRouter = require('./constrollers/users')
+const loginRouter = require('./constrollers/login')
+const cors = require('cors')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose');
+
 const { MONGODB_URI } = require('./utils/config')
 
 const app = express()
@@ -33,6 +35,7 @@ app.use(middleware.requestLogger)
 
 app.use('/api/notes', notesRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

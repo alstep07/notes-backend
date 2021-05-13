@@ -1,8 +1,8 @@
 POST http://localhost:3001/api/notes
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsc3RlcDA3IiwiaWQiOiI2MDljMjE5ZGIzMDY0Njc2MTQ3MmQ5YzAiLCJpYXQiOjE2MjA4OTA5NzV9.bLH_j1fVXuhS5jGLsDNTzWqzfqE9qPrkN8dvhIvL3Rk
 
 {
-    "content": "first alstep note",
-    "important": true,
-    "userId": "609c219db30646761472d9c0"
+    "content": "Authorized note without user id",
+    "important": true
 }
